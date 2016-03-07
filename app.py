@@ -50,7 +50,7 @@ def register():
 
 @app.route('/tasks', methods=['GET'])
 def tasks():
-   return "ok"
+   return render_template('tasks.html')
 
 
 

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html ng-app="controllerApp">
+<head>
+	<script type="text/javascript" src="static/js/angular.min.js"></script>
+	<script type="text/javascript" src="static/js/controller.js"></script>
+	<title></title>
+</head>
+<body ng-controller="ControllerCtrl">
+	<p ng-repeat='l in list track by $index'>
+		{{ '{{' }} l {{ '}}' }}
+		<button ng-click='remove($index)'>remove</button>
+	</p>
+	<input ng-model='input'></input>
+	<button ng-click='add()'>add</button>
+</body>
+</html>
