@@ -6,9 +6,15 @@
 	<title></title>
 </head>
 <body ng-controller="ControllerCtrl">
-	<p ng-repeat='l in list track by $index'>
-		{{ '{{' }} l {{ '}}' }}
-		<button ng-click='remove($index)'>remove</button>
+	<p ng-repeat='(item,l) in list'>
+		{{ '{{' }} item {{ '}}' }}
+		{% raw %}
+		{{ l | date:'HH:mm:ss'}}
+		{% endraw %}
+
+		<button ng-click='start(item)'>start</button>
+		<button ng-click='stop(item)'>stop</button>
+		<button ng-click='remove(item)'>remove</button>
 	</p>
 	<input ng-model='input'></input>
 	<button ng-click='add()'>add</button>
