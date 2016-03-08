@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="controllerApp">
+<html ng-app="controllerApp" >
 <head>
 	<script type="text/javascript" src="static/js/angular.min.js"></script>
 	<script type="text/javascript" src="static/js/controller.js"></script>
 	<title></title>
 </head>
-<body ng-controller="ControllerCtrl">
+<body ng-controller="ControllerCtrl" ng-init="init('{{user|safe}}')">
 	<p ng-repeat='(item,l) in list'>
 		{{ '{{' }} item {{ '}}' }}
 		{% raw %}
