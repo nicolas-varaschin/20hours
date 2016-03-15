@@ -95,14 +95,15 @@ def task(user, name):
     s.commit()
   return ''
 
-@app.route('/task_edit/<user>/<name>/<new_name>', methods=['PUT'])
-def task_new_name(user, name, new_name):
+@app.route('/task_edit/<user>/<name>/<new_name>/<time>', methods=['PUT'])
+def task_new_name(user, name, new_name,time):
   if request.method == "PUT":
     s = session()
     user = s.query(User).get(user)
     for task in user.tasks:
       if task.name == name:
         task.name = new_name
+        task.time = time
         s.add(task)
         s.commit()
         break

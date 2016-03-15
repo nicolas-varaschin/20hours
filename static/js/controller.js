@@ -46,18 +46,23 @@ controllerApp.controller('ControllerCtrl', function($scope, $interval, $http) {
     });
 	}
 
-    $scope.edit = function(item, new_item) {
+    $scope.edit = function(item, new_item,time) {
         if(!$scope.edit_enable[item]){
            $scope.edit_enable[item] = true;
            $scope.item_edit = item
+           $scope.time = $scope.list[item]
         } else {
-            $scope.list[new_item] = $scope.list[item]
-            delete $scope.list[item];
+            $scope.list[new_item] = time
+            if(item != new_item){
+                delete $scope.list[item];
+            }
             $http({
                 method: 'PUT',
-                url: 'task_edit/' + $scope.user + '/' + item + '/' + new_item,
+                url: 'task_edit/' + $scope.user + '/' + item + '/' + new_item + '/' + time,
              }).success(function(data){
                 console.log("edited");
+                $scope.edit_enable[new_item] = false;
+
             }).error(function(){
                 console.log("error");
             });

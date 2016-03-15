@@ -19,10 +19,8 @@
 		</span>
 		<span ng-show="edit_enable[item]">
 			<input ng-model="item_edit">
-			{% raw %}
-			{{ l | date:'HH:mm:ss'}}
-			{% endraw %}
-			<button ng-click='edit(item, item_edit)'>save</button>
+			<input ng-model="time">
+			<button ng-click='edit(item, item_edit,time)'>save</button>
 			<button ng-click='edit_enable[item]=false'>cancel</button>
 		</span>
 
