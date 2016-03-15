@@ -5,6 +5,7 @@ controllerApp.controller('ControllerCtrl', function($scope, $interval, $http) {
 	$scope.list = {}
 	$scope.intervals = {}
 	$scope.user = ''
+    $scope.edit_enable = {};
 
 	$scope.init = function(user) {
 		$scope.user = user
@@ -44,6 +45,25 @@ controllerApp.controller('ControllerCtrl', function($scope, $interval, $http) {
         console.log("error");
     });
 	}
+
+    $scope.edit = function(item, new_item) {
+        if(!$scope.edit_enable[item]){
+           $scope.edit_enable[item] = true;
+           $scope.item_edit = item
+        } else {
+            $scope.list[new_item] = $scope.list[item]
+            delete $scope.list[item];
+            $http({
+                method: 'PUT',
+                url: 'task_edit/' + $scope.user + '/' + item + '/' + new_item,
+             }).success(function(data){
+                console.log("edited");
+            }).error(function(){
+                console.log("error");
+            });
+
+        }
+    }
 
 	$scope.start = function(item) {
 		$scope.intervals[item] = $interval(function(){

@@ -7,14 +7,25 @@
 </head>
 <body ng-controller="ControllerCtrl" ng-init="init('{{user|safe}}')">
 	<p ng-repeat='(item,l) in list'>
-		{{ '{{' }} item {{ '}}' }}
-		{% raw %}
-		{{ l | date:'HH:mm:ss'}}
-		{% endraw %}
+	  <span ng-hide="edit_enable[item]">
+			{{ '{{' }} item {{ '}}' }}
+			{% raw %}
+			{{ l | date:'HH:mm:ss'}}
+			{% endraw %}
+			<button ng-click='start(item)'>start</button>
+			<button ng-click='stop(item)'>stop</button>
+			<button ng-click='edit(item)'>edit</button>
+			<button ng-click='remove(item)'>remove</button>
+		</span>
+		<span ng-show="edit_enable[item]">
+			<input ng-model="item_edit">
+			{% raw %}
+			{{ l | date:'HH:mm:ss'}}
+			{% endraw %}
+			<button ng-click='edit(item, item_edit)'>save</button>
+			<button ng-click='edit_enable[item]=false'>cancel</button>
+		</span>
 
-		<button ng-click='start(item)'>start</button>
-		<button ng-click='stop(item)'>stop</button>
-		<button ng-click='remove(item)'>remove</button>
 	</p>
 	<input ng-model='input'></input>
 	<button ng-click='add()'>add</button>
